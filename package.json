@@ -1,0 +1,32 @@
+{
+  "name": "english-learning-app",
+  "version": "1.0.0",
+  "description": "read books, learn new words",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavelmarkov/english-learning-app.git"
+  },
+  "keywords": [
+    "language",
+    "learning",
+    "reading",
+    "books",
+    "vocabulary"
+  ],
+  "author": "pavelmarkov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavelmarkov/english-learning-app/issues"
+  },
+  "homepage": "https://github.com/pavelmarkov/english-learning-app#readme",
+  "dependencies": {
+    "epub2": "^2.0.7"
+  }
+}
