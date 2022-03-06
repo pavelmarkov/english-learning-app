@@ -22,3 +22,15 @@ Electron - "background.js", vue - ".vue files"
 - [Question (github)](https://github.com/nklayman/vue-cli-plugin-electron-builder/issues/1041)
 - [ipcMain](https://www.electronjs.org/docs/latest/api/ipc-main)
 - [Essence of how to do it](https://stackoverflow.com/questions/55164360/with-contextisolation-true-is-it-possible-to-use-ipcrenderer/59675116#59675116)
+- [mitt](https://www.npmjs.com/package/mitt)
+
+### Vue Routing
+[Vue3 Routing](https://www.vuemastery.com/blog/vue-router-a-tutorial-for-vue-3/)
+
+### Vuetify 3
+[Doc](https://next.vuetifyjs.com/en/getting-started/installation/)
+[v3.0 (Titan) (Target Release: May 2022)](https://next.vuetifyjs.com/en/introduction/roadmap/)
+[mdi Icons](https://icon-sets.iconify.design/mdi/note-plus-outline/)
+
+### Vuex
+[state-management-in-vue-3-applications](https://auth0.com/blog/state-management-in-vue-3-applications/)
