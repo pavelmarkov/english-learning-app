@@ -1,14 +1,24 @@
 # english-learning-app
-read books, learn new words
 
-# Functions
-- Load epub
-- See the meaning of a word by clicking on it
-- Add new word to a database
-- Test your knowledge
+## Project setup
+```
+npm install
+```
 
-# Tools
-- JavaScript
-- Electron
-- SQLite
-- Puppeteer
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -11,9 +11,11 @@
 [turn off](https://github.com/electron/electron/issues/19775)
 
 ### Install Vue, Vuetify
-- vue create . (create app in current folder)
+- vue create . (choose vue3, create app in current folder)
 - vue add vuetify (choose vuetify 3)
-- npm install vuetify --save
+- npm install vuetify --save (styling framework, ready components)
+- npm install vuex@next --save (storage)
+- npm install vue-router@4 (for navigation)
 - vue add electron-builder
 - npm run electron:serve
 
