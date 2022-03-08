@@ -33,7 +33,7 @@
   export default {
     data: () => ({
       drawer: false,
-      currentLink: '/',
+      currentLink: 'Books',
       group: null,
       items: [
         {
@@ -56,7 +56,24 @@
     }),
     methods: {
       to (to) {
-        this.currentLink = to
+        switch (to) {
+          case '/':
+            this.currentLink = 'Books'
+            window.ipc
+            break;
+          case '/read':
+            this.currentLink = 'Read'
+            window.ipcRenderer.send("toMain", {"type": "test", "data": "read"})
+            break;
+          case '/learn':
+            this.currentLink = 'Lear'
+            break;
+          case '/test':
+            this.currentLink = 'Test'
+            break;                    
+          default:
+            break;
+        }
         this.$router.push(to)
       }
     },
