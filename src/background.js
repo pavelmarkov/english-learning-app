@@ -4,6 +4,8 @@ import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import path from 'path';
+import {database} from '../db'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 let win;
@@ -87,6 +89,7 @@ ipcMain.on("toMain", (event, args) => {
   switch (args.type) {
     case "test":
       win.webContents.send("fromMain", {"type": "test", "data": {"dt":"random dt"}})
+      database.insertBook('Book Title', 'path/to/bookfiles')
       break;
     default:
       break;
