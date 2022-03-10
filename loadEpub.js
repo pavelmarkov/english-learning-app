@@ -33,18 +33,40 @@ function processText(txt) {
 async function processEpub(path="./books/pg67543.epub", callback) {
 	let book = await EPub.createAsync(path);
 	// console.log(book.flow)
+	// console.log(book)
 	let book_title = book.metadata.title;
 	let name = book_title.replace(/[^a-zA-Z0-9., ]/g, '');
 	let dir = './database/'+name+'/'
 	if (!fs.existsSync(dir)){
 		fs.mkdirSync(dir, { recursive: true });
 	}
+	let cover_id = book.metadata.cover
+	// let cover_path = 'covers/cover.jpg'
 	let result = {
 		"book_title": book_title,
-		"cover_img": "",
+		// "cover_img": cover_path,
 		"dir": dir,
-		"toc": []
+		"toc": [], 
+		"img": ''
 	}
+	book.getImage(cover_id, (error, img, mimeType) => {
+		result.img = img.toString('base64')
+		// console.log(mimeType)
+		// fs.writeFile('./src/assets/'+cover_path, img, ()=>{})
+		let type = ''
+		// image/png, image/jpeg, image/gif, image/svg+xml
+		switch (mimeType) {
+			case 'image/jpeg':
+				type = '.jpeg'
+				break;
+			case 'image/png':
+				type = '.png'
+				break;
+			default:
+				break;
+		}
+		fs.writeFile(dir+'cover'+type, img, ()=>{})
+	});
 	for (let i = 0; i < book.toc.length; i++) {
 		const toc_item = book.toc[i];
 		let title = toc_item.title;

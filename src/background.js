@@ -1,10 +1,12 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, dialog } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import path from 'path';
+import fs from 'fs'
 import {database} from '../db'
+import {processEpub} from '../loadEpub'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -90,6 +92,37 @@ ipcMain.on("toMain", (event, args) => {
     case "test":
       win.webContents.send("fromMain", {"type": "test", "data": {"dt":"random dt"}})
       database.insertBook('Book Title', 'path/to/bookfiles')
+      break;
+    case "choose_file":
+      dialog.showOpenDialog(win, {
+        properties: ['openFile']
+      }).then(result => {
+        // console.log(result.canceled)
+        if(!result.canceled){
+          // console.log(result.filePaths)
+          processEpub(result.filePaths[0], dt => {
+            // console.log(dt);
+            win.webContents.send("fromMain", {"type": "new_book", "data": dt})
+          })
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+      break;
+    case "toc":
+      console.log('toc')
+      win.webContents.send("fromMain", {"type": "toc", "data": '123'})
+      break;
+    case "choose_chapter":
+      console.log('chapter', args.data)
+      let content = fs.readFileSync(args.data, 'utf-8');
+      let tokens = JSON.parse(content)
+      // console.log(tokens)
+      win.webContents.send("fromMain", {"type": "chapter", "data": tokens})
+      break;
+    case "word":
+      console.log(args)
+      database.insertWord(args.data)
       break;
     default:
       break;

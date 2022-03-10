@@ -1,6 +1,7 @@
 <template>
+    <!-- color="primary" -->
   <v-app-bar
-    color="primary"
+    color="purple"
     prominent
   >
     <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
