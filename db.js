@@ -1,20 +1,17 @@
 const sqlite3 = require('sqlite3').verbose();
-
+const fs = require('fs')
 const db = new sqlite3.Database("./database/database.sqlite");
-db.serialize(function() {
-  db.run(`CREATE TABLE if not exists books 
-          (id integer primary key,
-          title varchar(100),
-          path varchar(100));
-        `);
-  db.run(`CREATE TABLE if not exists words 
-        (id integer primary key,
-        word varchar(30),
-        book_id integer,
-          FOREIGN KEY (book_id)
-          REFERENCES books (id) );
-      `);
-});
+
+const creatDb_sql = fs.readFileSync("./sql/createDb.sql", 'utf-8')
+let statements = creatDb_sql.split('/*--separator--*/')
+
+for (let i = 0; i < statements.length; i++) {
+  const statement = statements[i];
+  console.log(statement)
+  db.serialize(function () {
+    db.run(statement)
+  })
+}
 
 const database =  {
   getBooks(){
