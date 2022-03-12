@@ -7,6 +7,7 @@ import path from 'path';
 import fs from 'fs'
 import {database} from '../db'
 import {processEpub} from '../loadEpub'
+import {browser} from '../browser'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -19,7 +20,7 @@ protocol.registerSchemesAsPrivileged([
 
 async function createWindow() {
   // Create the browser window.
-    win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -69,6 +70,7 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString())
     }
   }
+  await browser.start()
   createWindow()
 })
 
@@ -87,7 +89,7 @@ if (isDevelopment) {
   }
 }
 
-ipcMain.on("toMain", (event, args) => {
+ipcMain.on("toMain", async (event, args) => {
   switch (args.type) {
     case "test":
       win.webContents.send("fromMain", {"type": "test", "data": {"dt":"random dt"}})
@@ -122,7 +124,9 @@ ipcMain.on("toMain", (event, args) => {
       break;
     case "word":
       console.log(args)
-      database.insertWord(args.data)
+      let t = await browser.translate(args.data)
+      console.log(t)
+      // database.insertWord(args.data)
       break;
     default:
       break;
