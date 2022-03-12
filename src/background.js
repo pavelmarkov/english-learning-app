@@ -71,6 +71,8 @@ app.on('ready', async () => {
     }
   }
   await browser.start()
+  // let words = await fb.getWords()
+  // console.log(words)
   createWindow()
 })
 
@@ -123,10 +125,10 @@ ipcMain.on("toMain", async (event, args) => {
       win.webContents.send("fromMain", {"type": "chapter", "data": tokens})
       break;
     case "word":
-      console.log(args)
       let t = await browser.translate(args.data)
-      console.log(t)
-      // database.insertWord(args.data)
+      t = t.slice(0, 3)
+      let rus = t.reduce((p, c) => c.length > 0 ? `${c}; ${p}` : '', '');
+      database.insertWord(args.data, rus)
       break;
     default:
       break;

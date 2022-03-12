@@ -11,7 +11,7 @@ let browser = {
     let path = 'https://dictionary.cambridge.org/dictionary/english-russian/'
     await this.page.goto(path+word, { waitUntil: 'domcontentloaded' });
     const translations = await this.page.$$eval('span.trans.dtrans.dtrans-se', ts =>
-      ts.map(t => t.textContent).slice(0, 10)
+      ts.map(t => t.textContent.trim()).slice(0, 10)
     )
     return translations
   }

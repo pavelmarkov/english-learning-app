@@ -26,14 +26,14 @@ const database =  {
       console.log(row.id + ": " + row.title);
     });
   },
-  insertWord (word) {
-    let stmt = db.prepare(`INSERT INTO words (word, book_id)
-                            VALUES (?, ?)`);
-    stmt.run(word, 0);
+  insertWord (word, rus) {
+    let stmt = db.prepare(`INSERT INTO words (word, book_id, rus)
+                            VALUES (?, ?, ?)`);
+    stmt.run(word, 0, rus);
     stmt.finalize();
-    db.each("SELECT rowid AS id, word FROM words", function(err, row) {
-      console.log(row.id + ": " + row.word);
-    });
+    // db.each("SELECT rowid AS id, word FROM words", function(err, row) {
+    //   console.log(row.id + ": " + row.word);
+    // });
   }
 }
 // db.close();
