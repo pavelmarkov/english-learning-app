@@ -7,7 +7,7 @@
     - :white_check_mark: Create books component
   - &cross;Single book page, when one can read a book
     - :white_check_mark: Create book component
-    - &cross;install puppeteer
+    - :white_check_mark: install puppeteer
     - :white_check_mark: connect to SQLite database
     - &cross;add new word
   - &cross;"Learn new words" page

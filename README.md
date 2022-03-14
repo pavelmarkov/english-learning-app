@@ -12,3 +12,5 @@ read books, learn new words
 - Electron
 - SQLite
 - Puppeteer
+- Firebase
+  - Use firebase as a common database for this app and a its [mobile version](https://github.com/pavelmarkov/ela-mobile-app)
