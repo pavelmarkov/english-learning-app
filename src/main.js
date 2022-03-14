@@ -10,13 +10,6 @@ import store from "./store"
 import {registerEvents} from '../bridge/bridge.js'
 registerEvents(store)
 
-
-import {fb} from './fb'
-(async () => {
-  let words = await fb.getWords()
-  console.log(words)
-})()
-
 createApp(App)
   .use(router)
   .use(store)

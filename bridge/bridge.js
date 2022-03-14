@@ -1,6 +1,12 @@
 
+import {fb} from '../src/fb'
+// (async () => {
+//   let words = await fb.getWords()
+//   console.log(words)
+// })()
+
 function registerEvents(store) {
-  window.ipcRenderer.receive("fromMain", (dt) => {
+  window.ipcRenderer.receive("fromMain", async (dt) => {
     switch (dt.type) {
       case "test":
         store.commit("test", {"dt": "dt"});
@@ -13,10 +19,14 @@ function registerEvents(store) {
         console.log("chapter")
         store.commit("updateChapter", dt.data);
         break;
+      case "new_word":
+        console.log(dt)
+        fb.writeWord(dt.data.word, dt.data.rus)
+        break;
       default:
         break;
     }
   });  
 }
 
-module.exports.registerEvents = registerEvents
+export {registerEvents};
