@@ -31,6 +31,9 @@
   </v-navigation-drawer>
 </template>
 <script>
+
+  window.ipcRenderer.send("toMain", {"type": "books_list"});
+  
   export default {
     data: () => ({
       drawer: false,

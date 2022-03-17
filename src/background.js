@@ -7,6 +7,7 @@ import path from 'path';
 import fs from 'fs'
 import {database} from '../db'
 import {processEpub} from '../loadEpub'
+// import {loadBooks} from '../loadBooks'
 import {browser} from '../browser'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -95,7 +96,18 @@ ipcMain.on("toMain", async (event, args) => {
   switch (args.type) {
     case "test":
       win.webContents.send("fromMain", {"type": "test", "data": {"dt":"random dt"}})
-      database.insertBook('Book Title', 'path/to/bookfiles')
+      // database.insertBook('Book Title', 'path/to/bookfiles')
+      break;
+    case "books_list":
+      database.getBooks(dt => {
+        console.log("books_list")
+        let files = fs.readdirSync(dt.path).filter(fn => fn == '_MAIN_.json');
+        if (files.length > 0) {
+          let file = fs.readFileSync(dt.path + files[0], 'utf-8')
+          let book = JSON.parse(file)
+          win.webContents.send("fromMain", {"type": "new_book", "data": book})
+        }
+      })
       break;
     case "choose_file":
       dialog.showOpenDialog(win, {
@@ -106,6 +118,7 @@ ipcMain.on("toMain", async (event, args) => {
           // console.log(result.filePaths)
           processEpub(result.filePaths[0], dt => {
             // console.log(dt);
+            database.insertBook(dt)
             win.webContents.send("fromMain", {"type": "new_book", "data": dt})
           })
         }

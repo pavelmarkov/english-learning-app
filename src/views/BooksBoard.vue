@@ -82,7 +82,7 @@ export default {
       return store.state.books
     });
     let chooseBook = (book) => {
-      console.log(book)
+      // console.log(book)
       store.commit("chooseBook", book);
     }
     return {

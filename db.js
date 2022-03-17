@@ -1,5 +1,9 @@
 const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs')
+const db_folder = './database'
+if (!fs.existsSync(db_folder)){
+  fs.mkdirSync(db_folder);
+}
 const db = new sqlite3.Database("./database/database.sqlite");
 
 const creatDb_sql = fs.readFileSync("./sql/createDb.sql", 'utf-8')
@@ -14,13 +18,24 @@ for (let i = 0; i < statements.length; i++) {
 }
 
 const database =  {
-  getBooks(){
-    return 0
+  getBooks(callback){
+    db.each("SELECT rowid AS id, title, path FROM books", function(err, row) {
+      console.log(row.id + ": " + row.title);
+      let dt = {
+        "id": row.id,
+        "book_title": row.title,
+        "path": row.path,
+        "img": 'img'
+      }
+      callback(dt)
+    });
   },
-  insertBook (title, path) {
+  insertBook (data) {
+    // console.log(data)
+    let { book_title, dir } = data
     let stmt = db.prepare(`INSERT INTO books (title, path) 
                             VALUES (?, ?)`);
-    stmt.run([title, path]);
+    stmt.run([book_title, dir]);
     stmt.finalize();
     db.each("SELECT rowid AS id, title FROM books", function(err, row) {
       console.log(row.id + ": " + row.title);

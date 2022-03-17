@@ -85,6 +85,7 @@ async function processEpub(path="./books/pg67543.epub", callback) {
 			let file_name = title.replace(/[^a-zA-Z0-9., ]/g, '');
 			fs.writeFileSync(dir+file_name+'.json', JSON.stringify(text));
 			if(i == book.toc.length-1){
+				fs.writeFile(dir+'_MAIN_.json', JSON.stringify(result), ()=>{})
 				callback(result);
 			}
 		})
