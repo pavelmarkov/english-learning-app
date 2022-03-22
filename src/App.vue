@@ -6,20 +6,20 @@
         <router-view />
       </v-container>
     </v-main>
-    <TranslationComponent/>
+    <FooterComponent/>
   </v-app>
 </template>
 
 <script>
 import NavComponent from './components/NavComponent.vue'
-import TranslationComponent from "./components/TranslationComponent.vue"
+import FooterComponent from "./components/FooterComponent.vue"
 
 export default {
   name: 'App',
 
   components: {
     NavComponent,
-    TranslationComponent
+    FooterComponent
   },
 
   data: () => ({

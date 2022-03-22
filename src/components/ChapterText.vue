@@ -1,5 +1,4 @@
 <template>
-	<TranslationComponent/>
 	<span 
 	v-for="(token, i) in tokens"
 	:key="i"
