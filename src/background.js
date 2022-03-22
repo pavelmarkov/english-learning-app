@@ -141,7 +141,7 @@ ipcMain.on("toMain", async (event, args) => {
       let t = await browser.translate(args.data)
       t = t.slice(0, 3)
       let rus = t.reduce((p, c) => c.length > 0 ? `${c}; ${p}` : '', '');
-      database.insertWord(args.data, rus)
+      // database.insertWord(args.data, rus)
       let dt = {"word": args.data, "rus": rus}
       win.webContents.send("fromMain", {"type": "new_word", "data": dt})
       break;

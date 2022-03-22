@@ -22,6 +22,7 @@
   "main": "background.js",
   "dependencies": {
     "@mdi/font": "5.9.55",
+    "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "epub2": "^2.0.7",
     "esm": "^3.2.25",

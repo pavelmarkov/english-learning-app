@@ -5,6 +5,7 @@
   - :white_check_mark: Books board, when one can choose a book
     - :white_check_mark: Create epub loader
     - :white_check_mark: Create books component
+    - :white_check_mark: Save book to local db
   - &cross;Single book page, when one can read a book
     - :white_check_mark: Create book component
     - :white_check_mark: install puppeteer

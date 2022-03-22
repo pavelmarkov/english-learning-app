@@ -43,6 +43,7 @@
           </v-expand-transition>
         </v-card>
         <ChapterText :tokens="chapterTokens" />
+        <!-- <WordTranslation /> -->
       </v-col>
     </v-row>
   </v-container>
@@ -52,9 +53,11 @@
 import {computed } from "vue";
 import {useStore} from "vuex";
 import ChapterText from "../components/ChapterText.vue"
+// import WordTranslation from "../components/WordTranslation.vue"
 export default {
   components: {
     ChapterText
+    // WordTranslation
   },
   data: () => ({
     show: false,
