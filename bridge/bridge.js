@@ -25,7 +25,7 @@ function registerEvents(store) {
         break;
       case "new_word":
         // fb.writeWord(dt.data.word, dt.data.rus)
-        store.commit("setWord", dt);
+        // store.commit("setWord", dt);
         store.commit("addWord", dt);
         break;
       default:

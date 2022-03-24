@@ -29,7 +29,7 @@
 		methods: {
 			word(token, e){
 				console.log(token, e)
-				window.ipcRenderer.send("toMain", {"type": "word", "data": token.token});
+				window.ipcRenderer.send("toMain", {"type": "translate_word", "data": token.token});
 			}
 		},
 		setup(){

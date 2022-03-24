@@ -41,10 +41,12 @@ const database =  {
       console.log(row.id + ": " + row.title);
     });
   },
-  insertWord (word, rus) {
-    let stmt = db.prepare(`INSERT INTO words (word, book_id, rus)
-                            VALUES (?, ?, ?)`);
-    stmt.run(word, 0, rus);
+  insertWord (word) {
+    let stmt = db.prepare(`INSERT INTO words 
+    (word, transcription, rus, img, book_id)
+                            VALUES (?, ?, ?, ?, ?)`);
+    stmt.run(word.word, word.transcription, 
+      word.rus, word.img, 0);
     stmt.finalize();
     // db.each("SELECT rowid AS id, word FROM words", function(err, row) {
     //   console.log(row.id + ": " + row.word);

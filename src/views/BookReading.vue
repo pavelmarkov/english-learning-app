@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="book_reading">
     <v-row class="text-center">
       <v-col cols="12">
         <h1>BookReading</h1>
@@ -85,3 +85,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .book_reading{
+    padding-bottom: 64px;
+  }
+</style>

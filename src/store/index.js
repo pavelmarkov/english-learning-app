@@ -5,8 +5,8 @@ export default createStore({
     books: [],
     currentBook: false,
     chapterTokens: [],
-    translationActive: false,
-    currentWord: {},
+    // translationActive: false,
+    // currentWord: {},
     /*------------------------------*/
     currentItem: 'tab-Web',
     items: [
@@ -30,10 +30,10 @@ export default createStore({
     updateChapter(state, item) {
       state.chapterTokens = item;
     },
-    setWord(state, item) {
-      state.currentWord = item.data;
-      console.log(state.currentWord)
-    },
+    // setWord(state, item) {
+    //   state.currentWord = item.data;
+    //   console.log(state.currentWord)
+    // },
     addWord(state, item){
       if(state.items.length < 4){
         state.items.unshift(item.data)
