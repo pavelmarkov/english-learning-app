@@ -11,7 +11,7 @@ let statements = creatDb_sql.split('/*--separator--*/')
 
 for (let i = 0; i < statements.length; i++) {
   const statement = statements[i];
-  console.log(statement)
+  // console.log(statement)
   db.serialize(function () {
     db.run(statement)
   })
@@ -30,6 +30,12 @@ const database =  {
       callback(dt)
     });
   },
+  getWords(callback){
+    db.each("SELECT rowid AS id, word, transcription, rus, img FROM words", function(err, row) {
+      console.log(row.id + ": " + row.word);
+      callback(row)
+    });
+  },
   insertBook (data) {
     // console.log(data)
     let { book_title, dir } = data
@@ -42,7 +48,12 @@ const database =  {
     });
   },
   insertWord (word) {
-    let stmt = db.prepare(`INSERT INTO words 
+    let stmt = db.prepare(`DELETE FROM words
+    WHERE word = ?;`);
+    stmt.run(word.word);
+    stmt.finalize();
+
+    stmt = db.prepare(`INSERT INTO words 
     (word, transcription, rus, img, book_id)
                             VALUES (?, ?, ?, ?, ?)`);
     stmt.run(word.word, word.transcription, 

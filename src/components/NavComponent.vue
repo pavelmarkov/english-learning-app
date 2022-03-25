@@ -1,7 +1,8 @@
 <template>
     <!-- color="primary" -->
+    <!-- color="purple" -->
   <v-app-bar
-    color="purple"
+    class="nav-colors"
     prominent
   >
     <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -33,7 +34,8 @@
 <script>
 
   window.ipcRenderer.send("toMain", {"type": "books_list"});
-  
+  window.ipcRenderer.send("toMain", {"type": "words_list"});
+
   export default {
     data: () => ({
       drawer: false,
@@ -88,3 +90,9 @@
     },
   }
 </script>
+<style scoped>
+  .nav-colors {
+    background: rgb(var(--v-theme-navBackground));
+    color: rgba(var(--v-theme-navText), 0.9)
+  }
+</style>

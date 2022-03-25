@@ -28,8 +28,18 @@
 		}),
 		methods: {
 			word(token, e){
-				console.log(token, e)
-				window.ipcRenderer.send("toMain", {"type": "translate_word", "data": token.token});
+				let f = this.$store.state.items.find((e) => e.word == token.token);
+				if(f) {
+					// console.log('word already exists')
+					return;
+				}
+				if(this.$store.state.wordProcessing){
+					// console.log('translation is in progress')
+				} else {
+					console.log(token, e)
+					window.ipcRenderer.send("toMain", {"type": "translate_word", "data": token.token});
+					this.$store.state.wordProcessing = true
+				}
 			}
 		},
 		setup(){

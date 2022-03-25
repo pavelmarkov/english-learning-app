@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
-        <h1>BooksBoard</h1>
+        <h1>Books ({{books.length}})</h1>
       </v-col>
     </v-row>
     <v-row dense>

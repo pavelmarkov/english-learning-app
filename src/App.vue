@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <NavComponent/>
-    <v-main>
-      <v-container>
+    <v-main class="main_container">
+      <v-container >
         <router-view />
       </v-container>
     </v-main>
@@ -27,3 +27,9 @@ export default {
   }),
 }
 </script>
+<style scoped>
+  /* .main_container {
+    background: white;
+    height: 100vh;
+  } */
+</style>

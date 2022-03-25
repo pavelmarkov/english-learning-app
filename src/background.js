@@ -33,6 +33,8 @@ async function createWindow() {
       preload: path.join(__dirname, "..", "bridge/preload.js") // use a preload script
     }
   })
+  // win.setOpacity(0)
+  win.setBackgroundColor('white')
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
@@ -107,6 +109,11 @@ ipcMain.on("toMain", async (event, args) => {
           let book = JSON.parse(file)
           win.webContents.send("fromMain", {"type": "new_book", "data": book})
         }
+      })
+      break;
+    case "words_list":
+      database.getWords(dt => {
+        win.webContents.send("fromMain", {"type": "add_to_words_list", "data": dt})
       })
       break;
     case "choose_file":

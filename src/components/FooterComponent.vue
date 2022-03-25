@@ -76,8 +76,9 @@
 			</v-window-item>
 		</v-window>
 
+		<!-- color="deep-purple-accent-4" -->
 		<v-toolbar
-			color="deep-purple-accent-4"
+			class="footer-colors"
 		>
 			<v-tabs
 				v-model="this.$store.state.currentItem"
@@ -112,8 +113,8 @@
 
 					<v-list class="grey lighten-3">
 						<v-list-item
-							v-for="item in this.$store.state.more"
-							:key="item.word"
+							v-for="(item, i) in this.$store.state.more"
+							:key="i"
 							@click="addItem(item)"
 						>
 							{{ item.word }}
@@ -174,5 +175,9 @@
 		width: 100%;
 		height: 100%;
 	}
+  .footer-colors {
+    background: rgb(var(--v-theme-footerBackground));
+    color: rgba(var(--v-theme-footerText), 0.9)
+  }
 
 </style>

@@ -28,6 +28,11 @@ function registerEvents(store) {
         // store.commit("setWord", dt);
         store.commit("addWord", dt);
         break;
+      case "add_to_words_list":
+        // fb.writeWord(dt.data.word, dt.data.rus)
+        // store.commit("setWord", dt);
+        store.commit("addToWords", dt.data);
+        break;
       default:
         break;
     }

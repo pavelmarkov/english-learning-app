@@ -5,24 +5,26 @@ export default createStore({
     books: [],
     currentBook: false,
     chapterTokens: [],
-    // translationActive: false,
-    // currentWord: {},
-    /*------------------------------*/
     currentItem: 'tab-Web',
-    items: [
-      //{'word': 'Web', 'rus': 'Wb'} //, 'Shopping', 'Videos', 'Images',
-    ],
-    more: [
-      // 'News', 'Maps', 'Books', 'Flights', 'Apps',
-    ],
-    text: ''
+    items: [],
+    more: [],
+    text: '',
+    words: [],
+    wordProcessing: false
   },
   mutations: {
     test() {
       console.log("change state from electron thread test")
     },
     addBook(state, item) {
+      if(!state.currentBook){
+        state.currentBook = item
+      }
       state.books.unshift(item);
+    },
+    addToWords(state, item) {
+      console.log(item)
+      state.words.push(item)
     },
     chooseBook(state, item) {
       state.currentBook = item;
@@ -30,11 +32,10 @@ export default createStore({
     updateChapter(state, item) {
       state.chapterTokens = item;
     },
-    // setWord(state, item) {
-    //   state.currentWord = item.data;
-    //   console.log(state.currentWord)
-    // },
     addWord(state, item){
+      state.wordProcessing = false
+      let f = state.items.find((e) => e.word == item.data.word);
+      if(f) return;
       if(state.items.length < 4){
         state.items.unshift(item.data)
       } else {
@@ -50,7 +51,6 @@ export default createStore({
       }) 
       state.more.splice(idx, 1)
       state.more.push(removed[0])
-      // state.currentItem = 'tab-' + item
     }
   },
   actions: {

@@ -2,7 +2,7 @@
   <v-container class="book_reading">
     <v-row class="text-center">
       <v-col cols="12">
-        <h1>BookReading</h1>
+        <h1>{{book.book_title}}</h1>
       </v-col>
     </v-row>
     <v-row class="text-center">
