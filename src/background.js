@@ -13,6 +13,7 @@ import {browser} from '../browser'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 let win;
+// app.commandLine.appendSwitch("disable-http-cache");
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -154,6 +155,11 @@ ipcMain.on("toMain", async (event, args) => {
       break;
     case "save_word":
       database.insertWord(args.data)
+      win.webContents.send("fromMain", {"type": "add_to_words_list", "data": args.data})
+      break;
+    case "delete_word":
+      database.deleteWord(args.data)
+      win.webContents.send("fromMain", {"type": "delete_word", "data": args.data})
       break;
     default:
       break;

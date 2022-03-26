@@ -23,7 +23,9 @@ export default createStore({
       state.books.unshift(item);
     },
     addToWords(state, item) {
-      console.log(item)
+      // console.log(item)
+      let f = state.words.find((e) => e.word == item.word);
+      if(f) return;
       state.words.push(item)
     },
     chooseBook(state, item) {
@@ -51,6 +53,11 @@ export default createStore({
       }) 
       state.more.splice(idx, 1)
       state.more.push(removed[0])
+    },
+    deleteWord(state, w){
+      state.words = state.words.filter(obj => {
+        return obj.word !== w;
+      })
     }
   },
   actions: {

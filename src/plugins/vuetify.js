@@ -19,7 +19,8 @@ export default createVuetify({
           navBackground: '#9C27B0',
           navText: '#FFFFFF',
           footerBackground: '#9C27B0',
-          footerText: '#FFFFFF'
+          footerText: '#FFFFFF',
+          secondaryColor: "#1F7087"
         }
       }
     }

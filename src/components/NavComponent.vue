@@ -2,12 +2,12 @@
     <!-- color="primary" -->
     <!-- color="purple" -->
   <v-app-bar
-    class="nav-colors"
+    class="nav-colors nav-style"
     prominent
   >
     <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-    <v-toolbar-title>{{currentLink}}</v-toolbar-title>
+    <!-- <v-toolbar-title>{{currentLink}}</v-toolbar-title> -->
 
     <v-spacer></v-spacer>
     <v-btn variant="text" @click="to('/')" icon="mdi-view-dashboard"></v-btn>
@@ -94,5 +94,8 @@
   .nav-colors {
     background: rgb(var(--v-theme-navBackground));
     color: rgba(var(--v-theme-navText), 0.9)
+  }
+  .nav-style {
+    z-index: 5 !important;
   }
 </style>

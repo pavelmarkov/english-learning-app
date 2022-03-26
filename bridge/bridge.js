@@ -33,6 +33,11 @@ function registerEvents(store) {
         // store.commit("setWord", dt);
         store.commit("addToWords", dt.data);
         break;
+      case "delete_word":
+        // fb.writeWord(dt.data.word, dt.data.rus)
+        // store.commit("setWord", dt);
+        store.commit("deleteWord", dt.data);
+        break;
       default:
         break;
     }

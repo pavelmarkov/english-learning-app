@@ -1,6 +1,7 @@
 <template>
 	<v-card class="translation">
-		<v-window v-model="this.$store.state.currentItem" v-if="showTranslation">
+		<v-window v-model="this.$store.state.currentItem" v-if="showTranslation"
+		class="translation_card">
 			<v-window-item
 				v-for="item in this.$store.state.items.concat(this.$store.state.more)"
 				:key="item.word"
@@ -88,11 +89,11 @@
 					v-for="item in this.$store.state.items"
 					:key="item.word"
 					:value="'tab-' + item.word"
-					@click="open()"
+					@click="toggle()"
 				>
 					{{ item.word }}
 				</v-tab>
-
+				
 				<v-menu
 					v-if="this.$store.state.more.length"
 				>
@@ -123,9 +124,9 @@
 				</v-menu>
 			</v-tabs>
 			
-			<v-btn flat @click="toggle()">
+			<!-- <v-btn flat @click="toggle()">
 				Translation
-			</v-btn>
+			</v-btn> -->
 		</v-toolbar>
 	</v-card>
 </template>
@@ -134,19 +135,27 @@
 	export default {
 		data: () => ({
 			showTranslation: false,
-			imgIdx: 0
+			imgIdx: 0,
+			current: ''
 		}),
 		methods: {
 			addItem (item) {
+				this.current = 'tab-' + item.word
 				this.showTranslation = true;
 				this.$store.commit("addItem", item);
 				this.$nextTick(() => { this.$store.state.currentItem = 'tab-' + item.word })
 			},
-			open() {
-				this.showTranslation = true;
-			},
+			// open() {
+			// 	this.showTranslation = true;
+			// },
 			toggle() {
-				this.showTranslation = !this.showTranslation;
+				// console.log('c: '+this.current, 'S:'+this.$store.state.currentItem)
+				if(this.current !== this.$store.state.currentItem){
+					this.showTranslation = true;
+				} else {
+					this.showTranslation = !this.showTranslation;
+				}
+				this.current = this.$store.state.currentItem;
 			},
 			changeImg(){
 				if(this.imgIdx > 3){
@@ -167,6 +176,10 @@
 		position: fixed;
 		bottom: 0;
 		width: 100%;
+		z-index: 10 !important;
+	}
+	.translation_card{
+		z-index: 3 !important;
 	}
 	.change_img_btn {
 		position: absolute;
@@ -179,5 +192,10 @@
     background: rgb(var(--v-theme-footerBackground));
     color: rgba(var(--v-theme-footerText), 0.9)
   }
-
+	/* .other_words_menu {
+		z-index: 1008;
+	} */
+	/* .more {
+		align-self: flex-end;
+	} */
 </style>

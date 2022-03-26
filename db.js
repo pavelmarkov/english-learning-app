@@ -62,6 +62,12 @@ const database =  {
     // db.each("SELECT rowid AS id, word FROM words", function(err, row) {
     //   console.log(row.id + ": " + row.word);
     // });
+  },
+  deleteWord (word) {
+    let stmt = db.prepare(`DELETE FROM words
+    WHERE word = ?;`);
+    stmt.run(word);
+    stmt.finalize();
   }
 }
 // db.close();
