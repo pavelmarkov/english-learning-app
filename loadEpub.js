@@ -82,7 +82,7 @@ async function processEpub(path="./books/pg67543.epub", callback) {
 		})
 		book.getChapter(chapter.id, (error, text) => {
 			text = processText(text);
-			let file_name = title.replace(/[^a-zA-Z0-9., ]/g, '');
+			let file_name = title.replace(/[^a-zA-Z0-9.,_ ]/g, '');
 			fs.writeFileSync(dir+file_name+'.json', JSON.stringify(text));
 			if(i == book.toc.length-1){
 				fs.writeFile(dir+'_MAIN_.json', JSON.stringify(result), ()=>{})
@@ -93,4 +93,5 @@ async function processEpub(path="./books/pg67543.epub", callback) {
 }
 
 module.exports.processEpub = processEpub
-// processEpub(path="./books/pg67543.epub", callback=(dt)=>{console.log(dt)});
+// let title = 'Klaus_Schwab_Thierry_Malleret_-_COVID-19_The_Great_Reset_2020_Forum_Publishing_-_libgen_lc'
+// processEpub(path=`./books/${title}.epub`, callback=(dt)=>{console.log(dt)});
