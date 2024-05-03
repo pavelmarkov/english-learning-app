@@ -1,6 +1,11 @@
 # english-learning-app
 read books, learn new words
 
+# How to start
+
+- Open terminal at the app's root directory
+- Type `npm run electron:serve`, press `Enter`
+
 # How it works
 
 Function            |  Screenshot
